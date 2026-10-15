@@ -1,101 +1,171 @@
-import Image from "next/image";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { TopNavHUD } from "../components/hud/TopNavHUD";
+import { SkillTrackMap } from "../components/track/SkillTrackMap";
+import { SplitWorkspace } from "../components/workspace/SplitWorkspace";
+import { BossBattleArena } from "../components/arena/BossBattleArena";
+import { CalendarScheduleView } from "../components/calendar/CalendarScheduleView";
+import {
+  fetchCourseTrack,
+  fetchDAGStatus,
+  fetchBossStatus,
+  fetchUserProfile,
+  fetchCalendarEvents,
+} from "../lib/api";
+import {
+  CourseTrack,
+  DAGStatus,
+  BossArenaStatus,
+  User,
+  OntologyNode,
+  CalendarEvent,
+  FeynmanResult,
+} from "../lib/types";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeTab, setActiveTab] = useState<"track" | "workspace" | "arena" | "calendar">("track");
+  const [user, setUser] = useState<User | null>(null);
+  const [track, setTrack] = useState<CourseTrack | null>(null);
+  const [dagStatus, setDagStatus] = useState<DAGStatus | null>(null);
+  const [bossStatus, setBossStatus] = useState<BossArenaStatus | null>(null);
+  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
+  const [selectedNode, setSelectedNode] = useState<OntologyNode | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [levelUpAlert, setLevelUpAlert] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const loadAllData = async () => {
+    try {
+      const [u, t, d, b, c] = await Promise.all([
+        fetchUserProfile(),
+        fetchCourseTrack(),
+        fetchDAGStatus(),
+        fetchBossStatus(),
+        fetchCalendarEvents(),
+      ]);
+      setUser(u);
+      setTrack(t);
+      setDagStatus(d);
+      setBossStatus(b);
+      setCalendarEvents(c);
+
+      // Default select the first unlocked pending node if none selected
+      if (!selectedNode && t.nodes.length > 0) {
+        const topPending = t.nodes.find(
+          (n) => (d.unlock_states[n.id] ?? true) && n.mastery < 0.70
+        );
+        setSelectedNode(topPending || t.nodes[0]);
+      }
+    } catch (err) {
+      console.error("Failed to load platform data:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAllData();
+  }, []);
+
+  const handleEvaluationSuccess = (result: FeynmanResult) => {
+    // Update active node mastery locally
+    if (selectedNode) {
+      setSelectedNode({
+        ...selectedNode,
+        mastery: result.new_mastery,
+      });
+    }
+
+    if (result.leveled_up) {
+      setLevelUpAlert(`🎉 LEVEL UP! You reached Level ${result.current_level}!`);
+      setTimeout(() => setLevelUpAlert(null), 5000);
+    }
+
+    // Refresh all states
+    loadAllData();
+  };
+
+  const handleExportCanvas = () => {
+    window.open("http://127.0.0.1:8000/api/v1/obsidian/canvas", "_blank");
+  };
+
+  const handleSelectTopicFromArena = (topicId: string) => {
+    if (!track) return;
+    const found = track.nodes.find((n) => n.id === topicId);
+    if (found) {
+      setSelectedNode(found);
+      setActiveTab("workspace");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center space-y-4">
+        <div className="h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <span className="font-mono text-sm text-gray-400">
+          Initializing Socratic Feynman & Deterministic DAG Engine...
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      {/* Top Navigation HUD */}
+      <TopNavHUD
+        user={user}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onExportCanvas={handleExportCanvas}
+      />
+
+      {/* Level Up Banner */}
+      {levelUpAlert && (
+        <div className="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 text-white font-extrabold text-center py-2 px-4 shadow-lg text-sm animate-pulse">
+          {levelUpAlert}
         </div>
+      )}
+
+      {/* Main Content Area */}
+      <main className="flex-1 p-4 md:p-6 max-w-7xl mx-auto w-full">
+        {activeTab === "track" && track && (
+          <SkillTrackMap
+            nodes={track.nodes}
+            dagStatus={dagStatus}
+            selectedNode={selectedNode}
+            onSelectNode={(node) => {
+              setSelectedNode(node);
+              setActiveTab("workspace");
+            }}
+            onEnterLab={(node) => {
+              setSelectedNode(node);
+              setActiveTab("workspace");
+            }}
+          />
+        )}
+
+        {activeTab === "workspace" && selectedNode && (
+          <SplitWorkspace
+            node={selectedNode}
+            onEvaluationSuccess={handleEvaluationSuccess}
+          />
+        )}
+
+        {activeTab === "arena" && (
+          <BossBattleArena
+            bossStatus={bossStatus}
+            onRefresh={loadAllData}
+            onSelectTopicForCombat={handleSelectTopicFromArena}
+          />
+        )}
+
+        {activeTab === "calendar" && (
+          <CalendarScheduleView
+            events={calendarEvents}
+            onRefresh={loadAllData}
+          />
+        )}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }

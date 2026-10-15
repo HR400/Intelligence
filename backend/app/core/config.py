@@ -24,9 +24,7 @@ class Settings(BaseSettings):
     # Obsidian Vault Path
     DEFAULT_OBSIDIAN_VAULT_PATH: str = "./vault"
 
-    class Config:
-        env_file = ".env"
-        extra = "ignore"
+    model_config = {"env_file": ".env", "extra": "ignore"}
 
 
 settings = Settings()

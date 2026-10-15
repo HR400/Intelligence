@@ -2,52 +2,185 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Google Fonts: Space Grotesk (display) + Inter (body) + Space Mono (mono) ── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+/* ── Cohere Design Tokens ────────────────────────────────────────────────────── */
 :root {
-  --background: #070a12;
-  --foreground: #f3f4f6;
+  /* Surfaces */
+  --canvas:       #ffffff;
+  --soft-stone:   #eeece7;
+  --pale-green:   #edfce9;
+  --pale-blue:    #f1f5ff;
+  --deep-green:   #003c33;
+  --dark-navy:    #071829;
+  --primary:      #17171c;
+  /* Text */
+  --ink:          #212121;
+  --muted:        #93939f;
+  --body-muted:   #616161;
+  /* Accent */
+  --coral:        #ff7759;
+  --action-blue:  #1863dc;
+  --focus-blue:   #4c6ee6;
+  /* Borders */
+  --hairline:     #d9d9dd;
+  --card-border:  #f2f2f2;
+  /* Legacy */
+  --background:   #ffffff;
+  --foreground:   #212121;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────────────── */
+html {
+  font-family: 'Inter', ui-sans-serif, system-ui;
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background: var(--canvas);
+  color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-/* Custom Gaming Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ── Cohere Scrollbar — clean, minimal ───────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--hairline); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* ── Cohere Typography Utilities ─────────────────────────────────────────────── */
+.cohere-display {
+  font-family: 'Space Grotesk', Inter, ui-sans-serif, system-ui;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
-::-webkit-scrollbar-track {
-  background: #0b1120;
+.cohere-heading {
+  font-family: 'Inter', ui-sans-serif, system-ui;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1f2937;
+.cohere-mono {
+  font-family: 'Space Mono', Menlo, ui-monospace, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Cohere Component Utilities ──────────────────────────────────────────────── */
+
+/* Primary pill CTA — near-black, 32px radius */
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  font-family: 'Inter', ui-sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.71;
+  padding: 12px 24px;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* Secondary — underline text link */
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  font-family: 'Inter', ui-sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* Pill outline — taxonomy / filter */
+.btn-pill-outline {
+  background: transparent;
+  color: var(--primary);
+  font-family: 'Inter', ui-sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-pill-outline:hover { background: var(--soft-stone); }
+
+/* Dark feature band — deep-green section */
+.cohere-dark-band {
+  background-color: var(--deep-green);
+  color: #ffffff;
+  border-radius: 22px;
+  padding: 80px;
+}
+
+/* Product card — soft-stone surface */
+.cohere-product-card {
+  background-color: var(--soft-stone);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+/* Agent console card — near-black */
+.cohere-console-card {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+/* Blog/taxonomy coral chip */
+.cohere-coral-chip {
+  background: transparent;
+  color: var(--coral);
+  border: 1px solid var(--coral);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.cohere-coral-chip.active,
+.cohere-coral-chip:hover {
+  background: var(--coral);
+  color: var(--primary);
+}
+
+/* Thin-border card for capability panels */
+.cohere-capability-card {
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  padding: 24px;
   border-radius: 4px;
+  transition: border-color 0.15s;
+}
+.cohere-capability-card:hover {
+  border-top-color: var(--action-blue);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #374151;
-}
-
-/* Glassmorphism card utilities */
-.glass-panel {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(55, 65, 81, 0.45);
-}
-
-.glow-blue {
-  box-shadow: 0 0 20px -3px rgba(59, 130, 246, 0.35);
-}
-
-.glow-emerald {
-  box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.35);
-}
-
-.glow-crimson {
-  box-shadow: 0 0 20px -3px rgba(244, 63, 94, 0.35);
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: 2px;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, Lightbulb, Sparkles, AlertCircle, CheckCircle2, MessageSquare, Terminal as TerminalIcon } from "lucide-react";
+import { Send, Lightbulb, AlertCircle, CheckCircle2, Terminal as TerminalIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import { OntologyNode, FeynmanResult } from "../../lib/types";
 import { submitFeynmanExplanation } from "../../lib/api";
@@ -10,8 +10,8 @@ import { submitFeynmanExplanation } from "../../lib/api";
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
   ssr: false,
   loading: () => (
-    <div className="h-64 flex items-center justify-center bg-gray-950 text-gray-500 font-mono text-xs">
-      Loading Monaco Editor environment...
+    <div className="h-64 flex items-center justify-center bg-primary text-muted font-mono text-xs">
+      Loading Monaco editor environment...
     </div>
   ),
 });
@@ -78,12 +78,13 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
           needsScaffolding: evalResp.needs_scaffolding,
         },
       ]);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : "An unexpected error occurred";
       setMessages((prev) => [
         ...prev,
         {
           role: "proctor",
-          content: `Evaluation error: ${err.message}. Please verify backend connection.`,
+          content: `Evaluation error: ${errMsg}. Please verify backend connection.`,
         },
       ]);
     } finally {
@@ -105,24 +106,24 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col bg-gray-950 p-4 space-y-4 overflow-hidden">
+    <div className="h-full flex flex-col bg-primary p-6 space-y-4 overflow-hidden text-white">
       {/* Terminal Title Bar */}
-      <div className="flex items-center justify-between pb-2 border-b border-gray-800">
-        <div className="flex items-center gap-2">
-          <TerminalIcon className="h-4 w-4 text-emerald-400" />
-          <span className="text-xs font-mono font-bold text-gray-200">
+      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+        <div className="flex items-center gap-2.5">
+          <TerminalIcon className="h-4 w-4 text-coral" />
+          <span className="text-xs font-mono tracking-mono-label text-white/90">
             Socratic Feynman Terminal [Bounded &le; 150 Tokens]
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono text-gray-400 bg-gray-900 px-2 py-0.5 rounded border border-gray-800">
+        <div className="flex items-center gap-2.5">
+          <span className="text-[11px] font-mono text-white/60 bg-white/5 px-2.5 py-0.5 rounded-pill border border-white/10">
             Hints: {hintCount}
           </span>
           <button
             onClick={handleRequestHint}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-700/50 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1 text-xs font-mono text-coral bg-coral/10 hover:bg-coral/20 border border-coral/30 rounded-pill transition-all"
           >
-            <Lightbulb className="h-3.5 w-3.5" />
+            <Lightbulb className="h-3 w-3" />
             <span>Hint</span>
           </button>
         </div>
@@ -133,39 +134,39 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`p-3 rounded-xl border leading-relaxed ${
+            className={`p-4 rounded-sm border leading-relaxed ${
               msg.role === "student"
-                ? "bg-blue-950/40 border-blue-800/40 text-blue-100 ml-6"
-                : "bg-surface-card border-surface-border text-gray-200 mr-6"
+                ? "bg-white/5 border-white/10 text-white/90 ml-6"
+                : "bg-white/[0.08] border-white/15 text-white mr-6"
             }`}
           >
-            <div className="flex items-center justify-between mb-1 pb-1 border-b border-gray-800/60 font-mono text-[10px]">
-              <span className={msg.role === "student" ? "text-blue-400" : "text-emerald-400 font-bold"}>
-                {msg.role === "student" ? "YOU (STUDENT)" : "SOCRATIC PROCTOR"}
+            <div className="flex items-center justify-between mb-1.5 pb-1 border-b border-white/10 font-mono text-[10px]">
+              <span className={msg.role === "student" ? "text-action-blue" : "text-coral font-medium"}>
+                {msg.role === "student" ? "STUDENT (YOU)" : "SOCRATIC PROCTOR"}
               </span>
               {msg.accuracy !== undefined && (
-                <div className="flex items-center gap-2">
-                  <span className="text-amber-400">
+                <div className="flex items-center gap-3">
+                  <span className="text-coral font-mono">
                     Accuracy: {Math.round(msg.accuracy * 100)}%
                   </span>
-                  <span className="text-gray-500">
+                  <span className="text-white/40 font-mono">
                     {msg.tokensUsed} tokens
                   </span>
                 </div>
               )}
             </div>
-            <div className="whitespace-pre-wrap font-sans">{msg.content}</div>
+            <div className="whitespace-pre-wrap font-sans text-xs leading-relaxed font-light">{msg.content}</div>
 
             {msg.needsScaffolding && (
-              <div className="mt-2 p-2 bg-purple-950/40 border border-purple-800/40 rounded text-purple-300 text-[11px] flex items-center gap-1.5">
-                <AlertCircle className="h-3.5 w-3.5 text-purple-400 flex-shrink-0" />
+              <div className="mt-2.5 p-2.5 bg-coral/10 border border-coral/30 rounded-sm text-coral text-[11px] flex items-center gap-2">
+                <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
                 <span>N-1 Scaffolding engaged: Foundational prerequisite reinforcement required.</span>
               </div>
             )}
 
             {msg.isMastered && (
-              <div className="mt-2 p-2 bg-emerald-950/40 border border-emerald-800/40 rounded text-emerald-300 text-[11px] flex items-center gap-1.5 font-bold">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 flex-shrink-0" />
+              <div className="mt-2.5 p-2.5 bg-deep-green/60 border border-deep-green rounded-sm text-white text-[11px] flex items-center gap-2 font-mono">
+                <CheckCircle2 className="h-3.5 w-3.5 text-coral flex-shrink-0" />
                 <span>Topic Mastered! (+150 XP Mastery Bonus Granted)</span>
               </div>
             )}
@@ -174,10 +175,10 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
       </div>
 
       {/* Monaco Editor / Markdown Input */}
-      <div className="h-56 rounded-xl overflow-hidden border border-gray-800 bg-gray-900 flex flex-col">
-        <div className="bg-gray-900 px-3 py-1.5 border-b border-gray-800 text-[11px] text-gray-400 font-mono flex items-center justify-between">
+      <div className="h-56 rounded-sm overflow-hidden border border-white/10 bg-[#121216] flex flex-col">
+        <div className="bg-[#1c1c22] px-3.5 py-1.5 border-b border-white/10 text-[11px] text-white/60 font-mono flex items-center justify-between">
           <span>feynman_scratchpad.md</span>
-          <span className="text-gray-500">Ctrl + Enter to submit</span>
+          <span className="text-white/40">Ctrl + Enter to submit</span>
         </div>
         <div className="flex-1">
           <MonacoEditor
@@ -200,23 +201,23 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
 
       {/* Action Bar */}
       <div className="flex items-center justify-between pt-1">
-        <span className="text-[11px] text-gray-500 font-mono">
+        <span className="text-[11px] text-white/50 font-mono">
           Token-bounded: Answers restricted to probing questions.
         </span>
         <button
           onClick={handleSubmit}
           disabled={loading || !explanation.trim()}
-          className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-600/30 transition-all disabled:opacity-50"
+          className="flex items-center gap-2 px-6 py-2.5 bg-white hover:bg-soft-stone text-primary font-sans font-medium text-xs rounded-pill transition-all disabled:opacity-40 cursor-pointer"
         >
           {loading ? (
             <>
-              <div className="h-3.5 w-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <div className="h-3.5 w-3.5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
               <span>Evaluating...</span>
             </>
           ) : (
             <>
-              <Send className="h-3.5 w-3.5" />
-              <span>Submit Feynman Explanation</span>
+              <Send className="h-3.5 w-3.5 text-primary" />
+              <span>Submit Explanation</span>
             </>
           )}
         </button>
@@ -224,3 +225,4 @@ export const SocraticTerminal: React.FC<SocraticTerminalProps> = ({
     </div>
   );
 };
+

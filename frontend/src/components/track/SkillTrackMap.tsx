@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Sparkles, Network, ArrowDown } from "lucide-react";
-import { OntologyNode, DAGStatus, NodeTier } from "../../lib/types";
+import { OntologyNode, DAGStatus } from "../../lib/types";
 import { NodeCard } from "./NodeCard";
 
 interface SkillTrackMapProps {
@@ -34,47 +34,57 @@ export const SkillTrackMap: React.FC<SkillTrackMapProps> = ({
   );
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto py-4">
-      {/* Header and Priority Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-blue-950/40 via-surface-card to-indigo-950/30 p-5 rounded-2xl border border-blue-900/40 shadow-lg">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">
+    <div className="space-y-8 max-w-5xl mx-auto py-2">
+      {/* Cohere Deep Green Product Band */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-deep-green text-white p-7 md:p-9 rounded-lg">
+        <div className="max-w-xl">
+          <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-mono-label text-coral mb-2">
             <Network className="h-4 w-4" />
             <span>Deterministic DAG Skill Tree</span>
           </div>
-          <h2 className="text-xl font-extrabold text-white">
+          <h2 className="text-2xl md:text-3xl font-display tracking-heading-tight text-white font-normal">
             Curriculum Dependency Map
           </h2>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-sm text-white/80 mt-2 font-sans font-light leading-relaxed">
             Nodes unlock automatically when all prerequisite concepts reach 70%+ mastery.
+            Sequenced by Topological Sort and Topological Priority weightings.
           </p>
         </div>
 
         {topCandidate && (
-          <div className="flex items-center gap-3 bg-blue-900/30 border border-blue-500/40 px-4 py-2.5 rounded-xl">
-            <Sparkles className="h-5 w-5 text-amber-400 animate-pulse flex-shrink-0" />
-            <div className="text-left">
-              <span className="text-[10px] text-blue-300 uppercase font-bold block">
+          <button
+            onClick={() => {
+              const matched = nodes.find((n) => n.id === topCandidate.node_id);
+              if (matched) {
+                onSelectNode(matched);
+                onEnterLab(matched);
+              }
+            }}
+            className="flex items-center gap-3 bg-white/10 hover:bg-white/15 border border-white/20 px-5 py-3 rounded-md cursor-pointer text-left transition-all backdrop-blur-sm self-start md:self-auto"
+          >
+            <Sparkles className="h-5 w-5 text-coral flex-shrink-0" />
+            <div>
+              <span className="text-[10px] font-mono text-coral uppercase tracking-wider block">
                 Top Priority Quest P(v) = {topCandidate.priority.toFixed(2)}
               </span>
-              <span className="text-xs font-bold text-white block">
+              <span className="text-sm font-medium text-white block">
                 {topCandidate.title}
               </span>
             </div>
-          </div>
+          </button>
         )}
       </div>
 
       {/* Tier 1: SL Foundations */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-gray-800">
-          <span className="px-2 py-0.5 text-xs font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-700/50 rounded">
-            TIER 1 • SL
+      <section className="space-y-4">
+        <div className="flex items-center gap-3 pb-3 border-b border-hairline">
+          <span className="px-2.5 py-0.5 text-xs font-mono font-medium bg-soft-stone text-deep-green rounded-pill border border-card-border">
+            Tier 1 • SL
           </span>
-          <h3 className="text-sm font-bold text-gray-200">
+          <h3 className="text-base font-display font-medium text-ink">
             Standard Level Foundations
           </h3>
-          <span className="text-xs text-gray-500 ml-auto">
+          <span className="text-xs text-body-muted ml-auto font-mono">
             Base building blocks
           </span>
         </div>
@@ -93,20 +103,20 @@ export const SkillTrackMap: React.FC<SkillTrackMapProps> = ({
       </section>
 
       {/* Tier Connector */}
-      <div className="flex justify-center text-gray-600">
-        <ArrowDown className="h-6 w-6 animate-bounce" />
+      <div className="flex justify-center text-slate">
+        <ArrowDown className="h-5 w-5" />
       </div>
 
       {/* Tier 2: HL Core */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-gray-800">
-          <span className="px-2 py-0.5 text-xs font-bold bg-purple-950/80 text-purple-400 border border-purple-700/50 rounded">
-            TIER 2 • HL
+      <section className="space-y-4">
+        <div className="flex items-center gap-3 pb-3 border-b border-hairline">
+          <span className="px-2.5 py-0.5 text-xs font-mono font-medium bg-pale-blue text-action-blue rounded-pill border border-card-border">
+            Tier 2 • HL
           </span>
-          <h3 className="text-sm font-bold text-gray-200">
+          <h3 className="text-base font-display font-medium text-ink">
             Higher Level Core Concepts
           </h3>
-          <span className="text-xs text-gray-500 ml-auto">
+          <span className="text-xs text-body-muted ml-auto font-mono">
             Requires SL mastery ≥ 70%
           </span>
         </div>
@@ -125,21 +135,21 @@ export const SkillTrackMap: React.FC<SkillTrackMapProps> = ({
       </section>
 
       {/* Tier Connector */}
-      <div className="flex justify-center text-gray-600">
-        <ArrowDown className="h-6 w-6 animate-bounce" />
+      <div className="flex justify-center text-slate">
+        <ArrowDown className="h-5 w-5" />
       </div>
 
       {/* Tier 3: EX Advanced / Boss */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2.5 pb-2 border-b border-gray-800">
-          <span className="px-2 py-0.5 text-xs font-bold bg-rose-950/80 text-rose-400 border border-rose-700/50 rounded">
-            TIER 3 • EX
+      <section className="space-y-4">
+        <div className="flex items-center gap-3 pb-3 border-b border-hairline">
+          <span className="px-2.5 py-0.5 text-xs font-mono font-medium bg-soft-stone text-coral rounded-pill border border-card-border">
+            Tier 3 • EX
           </span>
-          <h3 className="text-sm font-bold text-gray-200">
+          <h3 className="text-base font-display font-medium text-ink">
             Advanced Extension & Boss Tier
           </h3>
-          <span className="text-xs text-gray-500 ml-auto">
-            Unlocks final Grand Turing Overlord
+          <span className="text-xs text-body-muted ml-auto font-mono">
+            Unlocks Final Overlord
           </span>
         </div>
         <div className="grid grid-cols-1 gap-4">
@@ -158,3 +168,4 @@ export const SkillTrackMap: React.FC<SkillTrackMapProps> = ({
     </div>
   );
 };
+

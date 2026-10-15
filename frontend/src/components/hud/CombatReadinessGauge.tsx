@@ -9,18 +9,18 @@ interface CombatReadinessGaugeProps {
 
 export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
   percentage,
-  size = 54,
+  size = 46,
 }) => {
-  const strokeWidth = 5;
+  const strokeWidth = 4;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   const getColor = () => {
-    if (percentage >= 80) return "#10b981"; // Emerald
-    if (percentage >= 50) return "#3b82f6"; // Blue
-    if (percentage >= 25) return "#f59e0b"; // Amber
-    return "#ef4444"; // Red
+    if (percentage >= 80) return "#003c33"; // Cohere Deep Green
+    if (percentage >= 50) return "#1863dc"; // Cohere Action Blue
+    if (percentage >= 25) return "#ff7759"; // Cohere Coral
+    return "#b30000"; // Cohere Error Red
   };
 
   return (
@@ -30,7 +30,7 @@ export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#1f2937"
+          stroke="#eeece7"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -48,10 +48,11 @@ export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-[11px] font-bold text-white tracking-tight">
+        <span className="text-[11px] font-mono font-medium text-ink">
           {percentage}%
         </span>
       </div>
     </div>
   );
 };
+

@@ -1,9 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calendar as CalendarIcon, Clock, ArrowRight, Zap, RefreshCw, CheckCircle, AlertTriangle } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, RefreshCw, CheckCircle, AlertTriangle } from "lucide-react";
 import { CalendarEvent } from "../../lib/types";
 import { triggerDriftCascade } from "../../lib/api";
+
+interface CascadeResult {
+  updated_task?: {
+    scheduled_start: string;
+  };
+  [key: string]: unknown;
+}
 
 interface CalendarScheduleViewProps {
   events: CalendarEvent[];
@@ -15,15 +22,15 @@ export const CalendarScheduleView: React.FC<CalendarScheduleViewProps> = ({
   onRefresh,
 }) => {
   const [driftProcessing, setDriftProcessing] = useState<boolean>(false);
-  const [lastCascadeResult, setLastCascadeResult] = useState<any>(null);
+  const [lastCascadeResult, setLastCascadeResult] = useState<CascadeResult | null>(null);
 
   const handleSimulateDrift = async (taskId: string) => {
     setDriftProcessing(true);
     try {
-      const res = await triggerDriftCascade(taskId);
+      const res = (await triggerDriftCascade(taskId)) as unknown as CascadeResult;
       setLastCascadeResult(res);
       onRefresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
     } finally {
       setDriftProcessing(false);
@@ -66,10 +73,12 @@ export const CalendarScheduleView: React.FC<CalendarScheduleViewProps> = ({
           <p className="text-gray-300">
             Missed block was deterministically shifted to next open freeBusy window:{" "}
             <span className="font-mono text-emerald-400">
-              {new Date(lastCascadeResult.updated_task.scheduled_start).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {lastCascadeResult.updated_task?.scheduled_start
+                ? new Date(lastCascadeResult.updated_task.scheduled_start).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "Upcoming slot"}
             </span>
           </p>
         </div>

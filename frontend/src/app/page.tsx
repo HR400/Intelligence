@@ -34,7 +34,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [levelUpAlert, setLevelUpAlert] = useState<string | null>(null);
 
-  const loadAllData = async () => {
+  const loadAllData = React.useCallback(async () => {
     try {
       const [u, t, d, b, c] = await Promise.all([
         fetchUserProfile(),
@@ -50,22 +50,25 @@ export default function Home() {
       setCalendarEvents(c);
 
       // Default select the first unlocked pending node if none selected
-      if (!selectedNode && t.nodes.length > 0) {
-        const topPending = t.nodes.find(
-          (n) => (d.unlock_states[n.id] ?? true) && n.mastery < 0.70
-        );
-        setSelectedNode(topPending || t.nodes[0]);
-      }
+      setSelectedNode((prev) => {
+        if (!prev && t.nodes.length > 0) {
+          const topPending = t.nodes.find(
+            (n) => (d.unlock_states[n.id] ?? true) && n.mastery < 0.70
+          );
+          return topPending || t.nodes[0];
+        }
+        return prev;
+      });
     } catch (err) {
       console.error("Failed to load platform data:", err);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadAllData();
-  }, []);
+  }, [loadAllData]);
 
   const handleEvaluationSuccess = (result: FeynmanResult) => {
     // Update active node mastery locally

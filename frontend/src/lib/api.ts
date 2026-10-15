@@ -57,7 +57,7 @@ export async function submitFeynmanExplanation(
   return res.json();
 }
 
-export async function triggerDriftCascade(taskId: string): Promise<any> {
+export async function triggerDriftCascade(taskId: string): Promise<Record<string, unknown>> {
   const res = await fetch(`${API_BASE_URL}/calendar/drift/cascade/${taskId}`, {
     method: "POST",
   });

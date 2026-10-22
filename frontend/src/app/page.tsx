@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { TopNavHUD } from "../components/hud/TopNavHUD";
+import { ObsidianVaultDrawer } from "../components/hud/ObsidianVaultDrawer";
 import { SkillTrackMap } from "../components/track/SkillTrackMap";
 import { SplitWorkspace } from "../components/workspace/SplitWorkspace";
 import { BossBattleArena } from "../components/arena/BossBattleArena";
@@ -13,6 +14,7 @@ import {
   fetchBossStatus,
   fetchUserProfile,
   fetchCalendarEvents,
+  fetchVaultTelemetry,
   isBackendLive,
 } from "../lib/api";
 import {
@@ -30,8 +32,10 @@ import {
   OntologyNode,
   CalendarEvent,
   FeynmanResult,
+  VaultTelemetry,
 } from "../lib/types";
-import { RefreshCw, Compass } from "lucide-react";
+import { playLevelUp } from "../lib/soundFx";
+import { RefreshCw, Compass, Layers } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"track" | "workspace" | "arena" | "calendar">("track");
@@ -41,6 +45,8 @@ export default function Home() {
   const [bossStatus, setBossStatus] = useState<BossArenaStatus>(DEFAULT_BOSS_STATUS);
   const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>(DEFAULT_CALENDAR_EVENTS);
   const [selectedNode, setSelectedNode] = useState<OntologyNode>(DEFAULT_TRACK.nodes[0]);
+  const [vaultTelemetry, setVaultTelemetry] = useState<VaultTelemetry | null>(null);
+  const [isVaultDrawerOpen, setIsVaultDrawerOpen] = useState<boolean>(false);
   const [isLiveConnected, setIsLiveConnected] = useState<boolean>(false);
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
   const [levelUpAlert, setLevelUpAlert] = useState<string | null>(null);
@@ -51,12 +57,13 @@ export default function Home() {
       const live = await isBackendLive();
       setIsLiveConnected(live);
 
-      const [u, t, d, b, c] = await Promise.all([
+      const [u, t, d, b, c, v] = await Promise.all([
         fetchUserProfile(),
         fetchCourseTrack(),
         fetchDAGStatus(),
         fetchBossStatus(),
         fetchCalendarEvents(),
+        fetchVaultTelemetry(),
       ]);
 
       setUser(u || DEFAULT_USER);
@@ -64,6 +71,7 @@ export default function Home() {
       setDagStatus(d || DEFAULT_DAG_STATUS);
       setBossStatus(b || DEFAULT_BOSS_STATUS);
       setCalendarEvents(c || DEFAULT_CALENDAR_EVENTS);
+      setVaultTelemetry(v);
 
       // Default select the first unlocked pending node if available
       const nodes = t?.nodes || DEFAULT_TRACK.nodes;
@@ -94,6 +102,7 @@ export default function Home() {
     }
 
     if (result.leveled_up) {
+      playLevelUp();
       setLevelUpAlert(`🎉 Level Up! You reached Level ${result.current_level}!`);
       setTimeout(() => setLevelUpAlert(null), 5000);
     }
@@ -121,6 +130,15 @@ export default function Home() {
         activeTab={activeTab}
         onTabChange={setActiveTab}
         onExportCanvas={handleExportCanvas}
+        onOpenVaultDrawer={() => setIsVaultDrawerOpen(true)}
+      />
+
+      {/* Obsidian Vault Slide-over Drawer */}
+      <ObsidianVaultDrawer
+        isOpen={isVaultDrawerOpen}
+        onClose={() => setIsVaultDrawerOpen(false)}
+        telemetry={vaultTelemetry}
+        onRefresh={loadAllData}
       />
 
       {/* Telemetry Status Bar */}
@@ -146,6 +164,14 @@ export default function Home() {
           </span>
           <span className="hidden sm:inline" style={{ color: "#2d3545" }}>|</span>
           <span className="hidden sm:inline">Active Syllabus: {track.title}</span>
+          <span className="hidden md:inline" style={{ color: "#2d3545" }}>|</span>
+          <button
+            onClick={() => setIsVaultDrawerOpen(true)}
+            className="hidden md:flex items-center gap-1 hover:text-[#d4af37] transition-colors"
+          >
+            <Layers className="h-3 w-3 text-[#d4af37]" />
+            <span>Vault: ~/learning-vault ({vaultTelemetry?.total_notes || 6} notes)</span>
+          </button>
         </div>
 
         <div className="flex items-center gap-4">

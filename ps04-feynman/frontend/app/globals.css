@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-canvas: #0d0e12;
+  --bg-surface: #161920;
+  --bg-surface-elevated: #222733;
+  --border-muted: #2d3545;
+  --border-accent: #c5a880;
+  --text-primary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --brand-gold: #d4af37;
+  --brand-crimson: #991b1b;
+  --brand-mana: #2563eb;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Tactical Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0e12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3545;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a880;
+}

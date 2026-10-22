@@ -109,3 +109,32 @@ export interface CalendarEvent {
   is_completed?: boolean;
   drift_count?: number;
 }
+
+export interface VaultNoteItem {
+  id: string;
+  filename: string;
+  rel_path: string;
+  obsidian_uri: string;
+  mastery: number;
+  tier: string;
+  last_modified: string;
+}
+
+export interface PiAgentInfo {
+  name: string;
+  model: string;
+  max_tokens_per_turn: number;
+  scaffolding: string;
+  rel_path: string;
+}
+
+export interface VaultTelemetry {
+  connected: boolean;
+  vault_path: string;
+  total_notes: number;
+  notes: VaultNoteItem[];
+  canvas_available: boolean;
+  canvas_uri: string | null;
+  pi_agent: PiAgentInfo | null;
+  last_sync: string;
+}

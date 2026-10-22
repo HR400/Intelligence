@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldAlert, Skull, Trophy, HeartPulse, Target, CheckCircle2, RefreshCw } from "lucide-react";
+import { ShieldAlert, Skull, Trophy, HeartPulse, Target, CheckCircle2, RefreshCw, Zap } from "lucide-react";
 import { BossArenaStatus, BossInfo } from "../../lib/types";
+import { playConceptualStrike, playMasteryChime, playClick } from "../../lib/soundFx";
 
 interface BossBattleArenaProps {
   bossStatus: BossArenaStatus | null;
@@ -16,6 +17,7 @@ export const BossBattleArena: React.FC<BossBattleArenaProps> = ({
   onSelectTopicForCombat,
 }) => {
   const [selectedBossType, setSelectedBossType] = useState<"MINI_BOSS" | "MAIN_BOSS">("MINI_BOSS");
+  const [floatingDamage, setFloatingDamage] = useState<{ id: number; text: string }[]>([]);
   const [combatLog, setCombatLog] = useState<string[]>([
     "Encounter initiated. Boss HP is synchronized directly with your syllabus knowledge deficits.",
   ]);
@@ -33,6 +35,7 @@ export const BossBattleArena: React.FC<BossBattleArenaProps> = ({
 
   const handleSimulateStrike = () => {
     if (activeBoss.is_defeated) {
+      playClick();
       setCombatLog((prev) => [
         `Boss is already vanquished! Claim your victory rewards in the Skill Tree.`,
         ...prev,
@@ -40,6 +43,19 @@ export const BossBattleArena: React.FC<BossBattleArenaProps> = ({
       return;
     }
     const damage = Math.min(activeBoss.current_hp, 50);
+    if (activeBoss.current_hp - damage <= 0) {
+      playMasteryChime();
+    } else {
+      playConceptualStrike();
+    }
+
+    // Trigger floating damage text
+    const damageId = Date.now();
+    setFloatingDamage((prev) => [...prev, { id: damageId, text: `-${damage} HP CRITICAL!` }]);
+    setTimeout(() => {
+      setFloatingDamage((prev) => prev.filter((d) => d.id !== damageId));
+    }, 1200);
+
     setCombatLog((prev) => [
       `⚔️ Conceptual Strike landed for ${damage} HP. Explaining core intuition dealt critical conceptual damage.`,
       ...prev,
@@ -93,6 +109,17 @@ export const BossBattleArena: React.FC<BossBattleArenaProps> = ({
         <div className="relative z-10 flex flex-col items-center text-center space-y-6">
           {/* Boss Portrait */}
           <div className="relative">
+            {/* Floating Damage Text */}
+            {floatingDamage.map((d) => (
+              <div
+                key={d.id}
+                className="absolute -top-6 left-1/2 -translate-x-1/2 font-mono text-sm font-bold text-red-500 animate-bounce pointer-events-none z-20 whitespace-nowrap drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]"
+              >
+                <Zap className="inline h-3.5 w-3.5 text-yellow-400 mr-1" />
+                {d.text}
+              </div>
+            ))}
+
             <div
               className="w-28 h-28 md:w-32 md:h-32 flex items-center justify-center transition-all duration-700"
               style={{

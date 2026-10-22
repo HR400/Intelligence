@@ -1,16 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Flame, Download, Calendar, Swords, Network, Terminal, Compass } from "lucide-react";
+import {
+  Flame,
+  Calendar,
+  Swords,
+  Network,
+  Terminal,
+  Compass,
+  Layers,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 import { CombatReadinessGauge } from "./CombatReadinessGauge";
 import { User } from "../../lib/types";
+import { isAudioMuted, toggleAudio, playClick } from "../../lib/soundFx";
 
 interface TopNavHUDProps {
   user: User | null;
   activeTab: "track" | "workspace" | "arena" | "calendar";
   onTabChange: (tab: "track" | "workspace" | "arena" | "calendar") => void;
   onExportCanvas: () => void;
+  onOpenVaultDrawer?: () => void;
 }
 
 export const TopNavHUD: React.FC<TopNavHUDProps> = ({
@@ -18,13 +30,22 @@ export const TopNavHUD: React.FC<TopNavHUDProps> = ({
   activeTab,
   onTabChange,
   onExportCanvas,
+  onOpenVaultDrawer,
 }) => {
+  const [muted, setMuted] = useState<boolean>(isAudioMuted());
+
   const level = user?.level || 1;
   const xp = user?.xp || 0;
   const xpToNext = user?.xp_to_next_level || 500;
   const streak = user?.streak || 0;
   const readiness = Math.round((user?.stats.combat_readiness || 0) * 100);
   const xpPercentage = Math.min(100, Math.round((xp / xpToNext) * 100));
+
+  const handleAudioToggle = () => {
+    const nextState = toggleAudio();
+    setMuted(nextState);
+    if (!nextState) playClick();
+  };
 
   const tabStyle = (tab: string) =>
     `flex items-center gap-1.5 px-4 py-2 text-[11px] font-medium uppercase tracking-widest transition-all duration-100 border cursor-pointer ${
@@ -35,7 +56,7 @@ export const TopNavHUD: React.FC<TopNavHUDProps> = ({
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b px-6 py-3"
+      className="sticky top-0 z-40 w-full border-b px-6 py-3"
       style={{ backgroundColor: "#161920", borderColor: "#2d3545" }}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -79,7 +100,7 @@ export const TopNavHUD: React.FC<TopNavHUDProps> = ({
                 {xp}/{xpToNext}
               </span>
             </div>
-            {/* RPG flat bar — no border-radius, solid fill */}
+            {/* RPG flat bar */}
             <div
               className="h-2 w-full overflow-hidden"
               style={{ backgroundColor: "#0d0e12", border: "1px solid #2d3545" }}
@@ -127,78 +148,61 @@ export const TopNavHUD: React.FC<TopNavHUDProps> = ({
           </button>
         </nav>
 
-        {/* Right: Streak & Combat Readiness & Export */}
-        <div className="flex items-center gap-4">
+        {/* Right: Streak, Combat Readiness & Obsidian Tools */}
+        <div className="flex items-center gap-3">
           {/* Streak Flame */}
           <div
-            className="flex items-center gap-1.5 px-3 py-1.5"
+            className="flex items-center gap-1.5 px-2.5 py-1.5"
             style={{ backgroundColor: "#222733", border: "1px solid #2d3545" }}
           >
-            <Flame className="h-3.5 w-3.5" style={{ color: "#d4af37", fill: "#d4af37" }} />
-            <span className="text-xs font-mono font-medium" style={{ color: "#e2e8f0" }}>{streak}d</span>
+            <Flame className="h-3.5 w-3.5 text-[#d4af37] fill-[#d4af37]" />
+            <span className="text-xs font-mono font-medium text-[#e2e8f0]">{streak}d</span>
           </div>
 
           {/* Combat Readiness Gauge */}
-          <div className="flex items-center gap-2 pl-2" style={{ borderLeft: "1px solid #2d3545" }}>
-            <CombatReadinessGauge percentage={readiness} size={38} />
+          <div className="flex items-center gap-2 pl-2 border-l border-[#2d3545]">
+            <CombatReadinessGauge percentage={readiness} size={36} />
             <div className="hidden sm:flex flex-col text-left">
-              <span className="text-[10px] uppercase font-mono tracking-widest leading-none" style={{ color: "#94a3b8" }}>
+              <span className="text-[10px] uppercase font-mono tracking-widest leading-none text-[#94a3b8]">
                 Exam Readiness
               </span>
-              <span className="text-xs font-mono font-medium leading-tight mt-0.5" style={{ color: "#d4af37" }}>
+              <span className="text-xs font-mono font-medium leading-tight mt-0.5 text-[#d4af37]">
                 R_exam
               </span>
             </div>
           </div>
 
+          {/* Sound FX Toggle */}
+          <button
+            onClick={handleAudioToggle}
+            title={muted ? "Unmute RPG sound effects" : "Mute RPG sound effects"}
+            className="p-1.5 text-xs border border-[#2d3545] bg-[#161920] hover:border-[#c5a880] text-[#94a3b8] hover:text-[#d4af37] transition-all cursor-pointer"
+          >
+            {muted ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5 text-[#d4af37]" />}
+          </button>
+
+          {/* Obsidian Vault Hub Drawer Trigger */}
+          <button
+            onClick={onOpenVaultDrawer || onExportCanvas}
+            title="Open Obsidian Vault & Pi Agent Sync Hub"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium uppercase tracking-wider border border-[#2d3545] bg-[#222733] hover:border-[#c5a880] text-[#e2e8f0] hover:text-[#d4af37] transition-all cursor-pointer"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#10b981] animate-pulse" />
+            <Layers className="h-3.5 w-3.5 text-[#d4af37]" />
+            <span className="hidden lg:inline">Vault Hub</span>
+          </button>
+
           {/* Overview Landing Link */}
           <Link
             href="/landing"
             title="View Antigravity System Overview"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium uppercase tracking-wider transition-all"
-            style={{
-              border: "1px solid #2d3545",
-              color: "#94a3b8",
-              backgroundColor: "#161920",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "#c5a880";
-              (e.currentTarget as HTMLAnchorElement).style.color = "#d4af37";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "#2d3545";
-              (e.currentTarget as HTMLAnchorElement).style.color = "#94a3b8";
-            }}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium uppercase tracking-wider border border-[#2d3545] bg-[#161920] hover:border-[#c5a880] text-[#94a3b8] hover:text-[#d4af37] transition-all"
           >
             <Compass className="h-3.5 w-3.5" />
-            <span className="hidden lg:inline">Overview</span>
+            <span className="hidden xl:inline">Overview</span>
           </Link>
-
-          {/* Export to Obsidian */}
-          <button
-            onClick={onExportCanvas}
-            title="Download Obsidian .canvas visual graph"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium uppercase tracking-wider transition-all cursor-pointer"
-            style={{
-              border: "1px solid #2d3545",
-              color: "#94a3b8",
-              backgroundColor: "#161920",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "#c5a880";
-              (e.currentTarget as HTMLButtonElement).style.color = "#d4af37";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "#2d3545";
-              (e.currentTarget as HTMLButtonElement).style.color = "#94a3b8";
-            }}
-          >
-            <Download className="h-3.5 w-3.5" />
-            <span className="hidden lg:inline">Obsidian</span>
-          </button>
         </div>
       </div>
     </header>
   );
 };
-

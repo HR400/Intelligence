@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import Link from "next/link";
 import { TopNavHUD } from "../components/hud/TopNavHUD";
 import { SkillTrackMap } from "../components/track/SkillTrackMap";
 import { SplitWorkspace } from "../components/workspace/SplitWorkspace";
@@ -12,7 +13,15 @@ import {
   fetchBossStatus,
   fetchUserProfile,
   fetchCalendarEvents,
+  isBackendLive,
 } from "../lib/api";
+import {
+  DEFAULT_USER,
+  DEFAULT_TRACK,
+  DEFAULT_DAG_STATUS,
+  DEFAULT_BOSS_STATUS,
+  DEFAULT_CALENDAR_EVENTS,
+} from "../lib/mockData";
 import {
   CourseTrack,
   DAGStatus,
@@ -22,20 +31,26 @@ import {
   CalendarEvent,
   FeynmanResult,
 } from "../lib/types";
+import { RefreshCw, Compass } from "lucide-react";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"track" | "workspace" | "arena" | "calendar">("track");
-  const [user, setUser] = useState<User | null>(null);
-  const [track, setTrack] = useState<CourseTrack | null>(null);
-  const [dagStatus, setDagStatus] = useState<DAGStatus | null>(null);
-  const [bossStatus, setBossStatus] = useState<BossArenaStatus | null>(null);
-  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>([]);
-  const [selectedNode, setSelectedNode] = useState<OntologyNode | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User>(DEFAULT_USER);
+  const [track, setTrack] = useState<CourseTrack>(DEFAULT_TRACK);
+  const [dagStatus, setDagStatus] = useState<DAGStatus>(DEFAULT_DAG_STATUS);
+  const [bossStatus, setBossStatus] = useState<BossArenaStatus>(DEFAULT_BOSS_STATUS);
+  const [calendarEvents, setCalendarEvents] = useState<CalendarEvent[]>(DEFAULT_CALENDAR_EVENTS);
+  const [selectedNode, setSelectedNode] = useState<OntologyNode>(DEFAULT_TRACK.nodes[0]);
+  const [isLiveConnected, setIsLiveConnected] = useState<boolean>(false);
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
   const [levelUpAlert, setLevelUpAlert] = useState<string | null>(null);
 
-  const loadAllData = React.useCallback(async () => {
+  const loadAllData = useCallback(async () => {
+    setIsSyncing(true);
     try {
+      const live = await isBackendLive();
+      setIsLiveConnected(live);
+
       const [u, t, d, b, c] = await Promise.all([
         fetchUserProfile(),
         fetchCourseTrack(),
@@ -43,26 +58,26 @@ export default function Home() {
         fetchBossStatus(),
         fetchCalendarEvents(),
       ]);
-      setUser(u);
-      setTrack(t);
-      setDagStatus(d);
-      setBossStatus(b);
-      setCalendarEvents(c);
 
-      // Default select the first unlocked pending node if none selected
-      setSelectedNode((prev) => {
-        if (!prev && t.nodes.length > 0) {
-          const topPending = t.nodes.find(
-            (n) => (d.unlock_states[n.id] ?? true) && n.mastery < 0.70
-          );
-          return topPending || t.nodes[0];
-        }
-        return prev;
-      });
+      setUser(u || DEFAULT_USER);
+      setTrack(t || DEFAULT_TRACK);
+      setDagStatus(d || DEFAULT_DAG_STATUS);
+      setBossStatus(b || DEFAULT_BOSS_STATUS);
+      setCalendarEvents(c || DEFAULT_CALENDAR_EVENTS);
+
+      // Default select the first unlocked pending node if available
+      const nodes = t?.nodes || DEFAULT_TRACK.nodes;
+      const unlocks = d?.unlock_states || DEFAULT_DAG_STATUS.unlock_states;
+      const topPending = nodes.find(
+        (n) => (unlocks[n.id] ?? true) && n.mastery < 0.70
+      );
+      if (topPending) {
+        setSelectedNode(topPending);
+      }
     } catch (err) {
-      console.error("Failed to load platform data:", err);
+      console.warn("Using offline fallback data:", err);
     } finally {
-      setLoading(false);
+      setIsSyncing(false);
     }
   }, []);
 
@@ -71,7 +86,6 @@ export default function Home() {
   }, [loadAllData]);
 
   const handleEvaluationSuccess = (result: FeynmanResult) => {
-    // Update active node mastery locally
     if (selectedNode) {
       setSelectedNode({
         ...selectedNode,
@@ -80,11 +94,10 @@ export default function Home() {
     }
 
     if (result.leveled_up) {
-      setLevelUpAlert(`🎉 LEVEL UP! You reached Level ${result.current_level}!`);
+      setLevelUpAlert(`🎉 Level Up! You reached Level ${result.current_level}!`);
       setTimeout(() => setLevelUpAlert(null), 5000);
     }
 
-    // Refresh all states
     loadAllData();
   };
 
@@ -93,7 +106,6 @@ export default function Home() {
   };
 
   const handleSelectTopicFromArena = (topicId: string) => {
-    if (!track) return;
     const found = track.nodes.find((n) => n.id === topicId);
     if (found) {
       setSelectedNode(found);
@@ -101,19 +113,8 @@ export default function Home() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center space-y-4">
-        <div className="h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <span className="font-mono text-sm text-gray-400">
-          Initializing Socratic Feynman & Deterministic DAG Engine...
-        </span>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen flex flex-col font-sans" style={{ backgroundColor: "#0d0e12", color: "#e2e8f0" }}>
       {/* Top Navigation HUD */}
       <TopNavHUD
         user={user}
@@ -122,16 +123,70 @@ export default function Home() {
         onExportCanvas={handleExportCanvas}
       />
 
+      {/* Telemetry Status Bar */}
+      <div
+        className="w-full px-6 py-1.5 flex items-center justify-between text-[11px] font-mono border-b"
+        style={{
+          backgroundColor: "#161920",
+          borderColor: "#2d3545",
+          color: "#94a3b8",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5">
+            <span
+              className="h-2 w-2 rounded-full inline-block animate-pulse"
+              style={{ backgroundColor: isLiveConnected ? "#10b981" : "#f59e0b" }}
+            />
+            <span style={{ color: isLiveConnected ? "#10b981" : "#d4af37" }}>
+              {isLiveConnected
+                ? "Backend Connected (Port 8000)"
+                : "Offline Demo Mode (FastAPI Auto-Syncing)"}
+            </span>
+          </span>
+          <span className="hidden sm:inline" style={{ color: "#2d3545" }}>|</span>
+          <span className="hidden sm:inline">Active Syllabus: {track.title}</span>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Link
+            href="/landing"
+            className="flex items-center gap-1 hover:text-[#d4af37] transition-colors"
+            title="Read system architecture and design overview"
+          >
+            <Compass className="h-3 w-3" />
+            <span className="hidden md:inline">Landing Page</span>
+          </Link>
+
+          <button
+            onClick={() => loadAllData()}
+            disabled={isSyncing}
+            className="flex items-center gap-1.5 px-2 py-0.5 border text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+            style={{
+              backgroundColor: "#222733",
+              borderColor: "#2d3545",
+              color: "#e2e8f0",
+            }}
+          >
+            <RefreshCw className={`h-2.5 w-2.5 ${isSyncing ? "animate-spin" : ""}`} />
+            <span>{isSyncing ? "Syncing..." : "Sync"}</span>
+          </button>
+        </div>
+      </div>
+
       {/* Level Up Banner */}
       {levelUpAlert && (
-        <div className="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 text-white font-extrabold text-center py-2 px-4 shadow-lg text-sm animate-pulse">
+        <div
+          className="font-medium text-center py-2 px-4 text-xs font-mono tracking-widest uppercase"
+          style={{ backgroundColor: "#d4af37", color: "#0d0e12" }}
+        >
           {levelUpAlert}
         </div>
       )}
 
       {/* Main Content Area */}
       <main className="flex-1 p-4 md:p-6 max-w-7xl mx-auto w-full">
-        {activeTab === "track" && track && (
+        {activeTab === "track" && (
           <SkillTrackMap
             nodes={track.nodes}
             dagStatus={dagStatus}
@@ -147,7 +202,7 @@ export default function Home() {
           />
         )}
 
-        {activeTab === "workspace" && selectedNode && (
+        {activeTab === "workspace" && (
           <SplitWorkspace
             node={selectedNode}
             onEvaluationSuccess={handleEvaluationSuccess}

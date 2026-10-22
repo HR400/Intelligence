@@ -15,11 +15,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect for Google Fonts loaded in globals.css */}
+        {/* Preconnect for Google Fonts & Fontshare (Switzer) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet" />
       </head>
-      <body className="antialiased bg-canvas text-ink min-h-screen">
+      <body className="antialiased bg-canvas text-ink min-h-screen" style={{ backgroundColor: "#0d0e12", color: "#e2e8f0" }}>
         {children}
       </body>
     </html>

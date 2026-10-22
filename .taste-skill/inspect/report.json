@@ -1,0 +1,2037 @@
+{
+ "url": "http://localhost:3000/landing",
+ "at": "2026-10-22T19:37:43.921Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 5,
+   "filled": [
+    0.33,
+    0.44,
+    0.32,
+    0.37,
+    0.69
+   ],
+   "motion": {
+    "elements": 33,
+    "css": 33,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 1
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 4266,
+     "screens": 4.7,
+     "words": 633,
+     "img": 3,
+     "video": 1,
+     "canvas": 0,
+     "svg": 5,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 1,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "image?url=%2Fassets%2Farchive%2Fthe-astrolabe-am",
+      "image?url=%2Fassets%2Farchive%2Fparhelia-from-as",
+      "image?url=%2Fassets%2Farchive%2Flaser-towards-mi"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "chars": 23,
+     "lines": 2,
+     "size": 60,
+     "vw": 4.2,
+     "font": "Switzer",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.3,
+     "top": 160,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "lines": 2,
+     "size": 60,
+     "font": "Switzer"
+    },
+    "headings": [
+     {
+      "text": "Learning without drift.",
+      "words": 3,
+      "chars": 23,
+      "lines": 2,
+      "size": 60,
+      "vw": 4.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.3,
+      "top": 160,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Observational lineage.",
+      "words": 2,
+      "chars": 22,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 832,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Algorithmic invariants.",
+      "words": 2,
+      "chars": 23,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 1578,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Test Socratic proctoring.",
+      "words": 3,
+      "chars": 25,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 2130,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Empirical telemetry.",
+      "words": 2,
+      "chars": 20,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.47,
+      "top": 2724,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Initialize your syllabus.",
+      "words": 3,
+      "chars": 25,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 3519,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 6,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Switzer",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Inter",
+       "share": 0.02,
+       "mono": false
+      },
+      {
+       "family": "Fira Code",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 3,
+     "sizes": [
+      14,
+      16,
+      18,
+      20,
+      24,
+      36,
+      60
+     ],
+     "sizeCount": 7,
+     "notLoaded": [
+      "Inter",
+      "Fira Code"
+     ],
+     "body": {
+      "font": "Switzer",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.6
+     },
+     "measureChars": 43,
+     "max": {
+      "size": 60,
+      "vw": 4.2,
+      "font": "Switzer",
+      "text": "Learning without drift."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "Fira Code"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0d0e12",
+     "bodyBgHsl": {
+      "h": 228,
+      "s": 0.16,
+      "l": 0.06
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0d0e12",
+       "top": 0,
+       "hsl": {
+        "h": 228,
+        "s": 0.16,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#161920",
+       "top": 2892,
+       "hsl": {
+        "h": 222,
+        "s": 0.19,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#e2e8f0",
+       "share": 0.84
+      },
+      {
+       "color": "#94a3b8",
+       "share": 0.1
+      },
+      {
+       "color": "#d4af37",
+       "share": 0.04
+      },
+      {
+       "color": "#0d0e12",
+       "share": 0.02
+      },
+      {
+       "color": "#93c5fd",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#d4af37",
+      "hsl": {
+       "h": 46,
+       "s": 0.65,
+       "l": 0.52
+      },
+      "fg": "#0d0e12"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Enter Workspace",
+      "Launch Academic DAG",
+      "Test Feynman Proctor",
+      "Trigger Calendar Drift"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 4,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 1016
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 3890
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 6,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "switzer"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 4266,
+    "margins": {
+     "left": 168,
+     "right": 168
+    },
+    "sections": [
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 160,
+      "height": 544,
+      "words": 128,
+      "media": 0,
+      "middle": 77,
+      "heading": null,
+      "left": 168,
+      "right": 192,
+      "textLeft": 168,
+      "textRight": 192,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#archive.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 832,
+      "height": 617,
+      "words": 157,
+      "media": 4,
+      "middle": 24,
+      "heading": {
+       "text": "Observational lineage.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 168,
+      "right": 168,
+      "textLeft": 168,
+      "textRight": 198,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#methodology.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 1578,
+      "height": 424,
+      "words": 164,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Algorithmic invariants.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 168,
+      "right": 168,
+      "textLeft": 168,
+      "textRight": 168,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#interactive-proctor.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 2130,
+      "height": 466,
+      "words": 84,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Test Socratic proctoring.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 168,
+      "right": 192,
+      "textLeft": 168,
+      "textRight": 192,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#telemetry.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 2724,
+      "height": 568,
+      "words": 86,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Empirical telemetry.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 168,
+      "right": 619,
+      "textLeft": 168,
+      "textRight": 619,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 3420,
+      "height": 310,
+      "words": 24,
+      "media": 0,
+      "middle": 143,
+      "heading": {
+       "text": "Initialize your syllabus.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 224,
+      "right": 248,
+      "textLeft": 224,
+      "textRight": 331,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#161920].py-16",
+      "tag": "footer",
+      "top": 3826,
+      "height": 441,
+      "words": 73,
+      "media": 0,
+      "middle": 165,
+      "heading": null,
+      "left": 168,
+      "right": 168,
+      "textLeft": 168,
+      "textRight": 168,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Learning without drift.",
+      "size": 60,
+      "top": 160,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 168,
+      "n": 14
+     },
+     {
+      "x": 740,
+      "n": 4
+     },
+     {
+      "x": 188,
+      "n": 2
+     },
+     {
+      "x": 224,
+      "n": 2
+     },
+     {
+      "x": 470,
+      "n": 2
+     },
+     {
+      "x": 752,
+      "n": 2
+     },
+     {
+      "x": 776,
+      "n": 2
+     },
+     {
+      "x": 1034,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 30,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.11,
+    "voidBox": {
+     "x": 1260,
+     "y": 120,
+     "w": 180,
+     "h": 780
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 6,
+   "filled": [
+    0.64,
+    0.7,
+    0.52,
+    0.41,
+    0.51,
+    0.51
+   ],
+   "motion": {
+    "elements": 33,
+    "css": 33,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 1
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 5874,
+     "screens": 5.7,
+     "words": 633,
+     "img": 3,
+     "video": 1,
+     "canvas": 0,
+     "svg": 5,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 1,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "image?url=%2Fassets%2Farchive%2Fthe-astrolabe-am",
+      "image?url=%2Fassets%2Farchive%2Fparhelia-from-as",
+      "image?url=%2Fassets%2Farchive%2Flaser-towards-mi"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "chars": 23,
+     "lines": 1,
+     "size": 48,
+     "vw": 6.3,
+     "font": "Switzer",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.94,
+     "top": 160,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "lines": 1,
+     "size": 48,
+     "font": "Switzer"
+    },
+    "headings": [
+     {
+      "text": "Learning without drift.",
+      "words": 3,
+      "chars": 23,
+      "lines": 1,
+      "size": 48,
+      "vw": 6.3,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 160,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Observational lineage.",
+      "words": 2,
+      "chars": 22,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 1158,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Algorithmic invariants.",
+      "words": 2,
+      "chars": 23,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 2379,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Test Socratic proctoring.",
+      "words": 3,
+      "chars": 25,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3099,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Empirical telemetry.",
+      "words": 2,
+      "chars": 20,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4049,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Initialize your syllabus.",
+      "words": 3,
+      "chars": 25,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 4801,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 6,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Switzer",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Inter",
+       "share": 0.02,
+       "mono": false
+      },
+      {
+       "family": "Fira Code",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 3,
+     "sizes": [
+      14,
+      16,
+      18,
+      20,
+      24,
+      36,
+      48
+     ],
+     "sizeCount": 7,
+     "notLoaded": [
+      "Inter",
+      "Fira Code"
+     ],
+     "body": {
+      "font": "Switzer",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.6
+     },
+     "measureChars": 72,
+     "max": {
+      "size": 48,
+      "vw": 6.3,
+      "font": "Switzer",
+      "text": "Learning without drift."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "Fira Code"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0d0e12",
+     "bodyBgHsl": {
+      "h": 228,
+      "s": 0.16,
+      "l": 0.06
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0d0e12",
+       "top": 0,
+       "hsl": {
+        "h": 228,
+        "s": 0.16,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#161920",
+       "top": 508,
+       "hsl": {
+        "h": 222,
+        "s": 0.19,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#e2e8f0",
+       "share": 0.84
+      },
+      {
+       "color": "#94a3b8",
+       "share": 0.1
+      },
+      {
+       "color": "#d4af37",
+       "share": 0.04
+      },
+      {
+       "color": "#0d0e12",
+       "share": 0.02
+      },
+      {
+       "color": "#93c5fd",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#d4af37",
+      "hsl": {
+       "h": 46,
+       "s": 0.65,
+       "l": 0.52
+      },
+      "fg": "#0d0e12"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Enter Workspace",
+      "Launch Academic DAG",
+      "Test Feynman Proctor",
+      "Trigger Calendar Drift"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 4,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 1342
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 5359
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 6,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "switzer"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 5874,
+    "margins": {
+     "left": 24,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 160,
+      "height": 870,
+      "words": 128,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#archive.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 1158,
+      "height": 1093,
+      "words": 157,
+      "media": 4,
+      "middle": 0,
+      "heading": {
+       "text": "Observational lineage.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 71,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#methodology.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 2379,
+      "height": 592,
+      "words": 164,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Algorithmic invariants.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#interactive-proctor.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 3099,
+      "height": 822,
+      "words": 84,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Test Socratic proctoring.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 48,
+      "textLeft": 24,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#telemetry.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 4049,
+      "height": 568,
+      "words": 86,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Empirical telemetry.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 91,
+      "textLeft": 24,
+      "textRight": 91,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 4745,
+      "height": 454,
+      "words": 24,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Initialize your syllabus.",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 80,
+      "right": 104,
+      "textLeft": 80,
+      "textRight": 210,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#161920].py-16",
+      "tag": "footer",
+      "top": 5295,
+      "height": 579,
+      "words": 73,
+      "media": 0,
+      "middle": 73,
+      "heading": null,
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Learning without drift.",
+      "size": 48,
+      "top": 160,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 14
+     },
+     {
+      "x": 44,
+      "n": 4
+     },
+     {
+      "x": 404,
+      "n": 4
+     },
+     {
+      "x": 416,
+      "n": 4
+     },
+     {
+      "x": 64,
+      "n": 2
+     },
+     {
+      "x": 80,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 30,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 10,
+   "filled": [
+    0.55,
+    0.48,
+    0.92,
+    0.8,
+    0.49,
+    0.56,
+    0.54,
+    0.63,
+    0.67,
+    0.52
+   ],
+   "motion": {
+    "elements": 33,
+    "css": 33,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 1,
+    "playingVideos": 1
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 8286,
+     "screens": 9.8,
+     "words": 626,
+     "img": 3,
+     "video": 1,
+     "canvas": 0,
+     "svg": 5,
+     "sections": 6,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 1,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "image?url=%2Fassets%2Farchive%2Fthe-astrolabe-am",
+      "image?url=%2Fassets%2Farchive%2Fparhelia-from-as",
+      "image?url=%2Fassets%2Farchive%2Flaser-towards-mi"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "chars": 23,
+     "lines": 2,
+     "size": 36,
+     "vw": 9.2,
+     "font": "Switzer",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.05,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.88,
+     "top": 128,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Learning without drift.",
+     "words": 3,
+     "lines": 2,
+     "size": 36,
+     "font": "Switzer"
+    },
+    "headings": [
+     {
+      "text": "Learning without drift.",
+      "words": 3,
+      "chars": 23,
+      "lines": 2,
+      "size": 36,
+      "vw": 9.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 128,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Observational lineage.",
+      "words": 2,
+      "chars": 22,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 1545,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Algorithmic invariants.",
+      "words": 2,
+      "chars": 23,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3701,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Deterministic NetworkX Graph Topologies",
+      "words": 4,
+      "chars": 39,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3875,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Zero-Token Calendar Drift Cascades",
+      "words": 4,
+      "chars": 34,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4109,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Token-Bounded Socratic Feynman Proctor",
+      "words": 4,
+      "chars": 38,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4351,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Direct Obsidian Canvas Export",
+      "words": 4,
+      "chars": 29,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4585,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Test Socratic proctoring.",
+      "words": 3,
+      "chars": 25,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4857,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Empirical telemetry.",
+      "words": 2,
+      "chars": 20,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 5963,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Initialize your syllabus.",
+      "words": 3,
+      "chars": 25,
+      "lines": 2,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Switzer",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 6851,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 10,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Switzer",
+       "share": 0.97,
+       "mono": false
+      },
+      {
+       "family": "Inter",
+       "share": 0.02,
+       "mono": false
+      },
+      {
+       "family": "Fira Code",
+       "share": 0,
+       "mono": false
+      }
+     ],
+     "familyCount": 3,
+     "sizes": [
+      14,
+      16,
+      18,
+      24,
+      30,
+      36
+     ],
+     "sizeCount": 6,
+     "notLoaded": [
+      "Inter",
+      "Fira Code"
+     ],
+     "body": {
+      "font": "Switzer",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 15.6
+     },
+     "measureChars": 38,
+     "max": {
+      "size": 36,
+      "vw": 9.2,
+      "font": "Switzer",
+      "text": "Learning without drift."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [
+      "Fira Code"
+     ],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#0d0e12",
+     "bodyBgHsl": {
+      "h": 228,
+      "s": 0.16,
+      "l": 0.06
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#0d0e12",
+       "top": 0,
+       "hsl": {
+        "h": 228,
+        "s": 0.16,
+        "l": 0.06
+       }
+      },
+      {
+       "color": "#161920",
+       "top": 683,
+       "hsl": {
+        "h": 222,
+        "s": 0.19,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#e2e8f0",
+       "share": 0.83
+      },
+      {
+       "color": "#94a3b8",
+       "share": 0.1
+      },
+      {
+       "color": "#d4af37",
+       "share": 0.04
+      },
+      {
+       "color": "#0d0e12",
+       "share": 0.02
+      },
+      {
+       "color": "#93c5fd",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#d4af37",
+      "hsl": {
+       "h": 46,
+       "s": 0.65,
+       "l": 0.52
+      },
+      "fg": "#0d0e12"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": 0,
+     "height": 52,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Enter Workspace",
+      "Launch Academic DAG",
+      "Test Feynman Proctor",
+      "Trigger Calendar Drift"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 4,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 1771
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 6163
+      },
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 7407
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "switzer"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 8286,
+    "margins": {
+     "left": 24,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 128,
+      "height": 1289,
+      "words": 128,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 24,
+      "right": 36,
+      "textLeft": 24,
+      "textRight": 36,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.max-w-2xl.space-y-3",
+      "tag": "div",
+      "top": 1545,
+      "height": 178,
+      "words": 33,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Observational lineage.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 29,
+      "textLeft": 24,
+      "textRight": 29,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "div.grid.grid-cols-1",
+      "tag": "div",
+      "top": 1771,
+      "height": 1802,
+      "words": 124,
+      "media": 4,
+      "middle": 0,
+      "heading": {
+       "text": "Jan van der Straet: The Astrolabe",
+       "size": 16,
+       "tag": "h3"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 44,
+      "textRight": 47,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#methodology.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 3701,
+      "height": 1028,
+      "words": 164,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Algorithmic invariants.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#interactive-proctor.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 4857,
+      "height": 978,
+      "words": 84,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Test Socratic proctoring.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 26,
+      "textLeft": 24,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#telemetry.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 5963,
+      "height": 728,
+      "words": 86,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Empirical telemetry.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 25,
+      "textLeft": 24,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.max-w-6xl.mx-auto",
+      "tag": "section",
+      "top": 6819,
+      "height": 460,
+      "words": 24,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Initialize your syllabus.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 56,
+      "right": 67,
+      "textLeft": 56,
+      "textRight": 67,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-[#161920].py-16",
+      "tag": "footer",
+      "top": 7343,
+      "height": 943,
+      "words": 73,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 45,
+      "right": 45,
+      "textLeft": 45,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Learning without drift.",
+      "size": 36,
+      "top": 128,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 18
+     },
+     {
+      "x": 44,
+      "n": 8
+     },
+     {
+      "x": 56,
+      "n": 3
+     },
+     {
+      "x": 68,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 30,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "card-rows",
+   "width": 1440,
+   "message": "2 rows of identical boxed cards.",
+   "fix": "Vary the composition; not every section is a card grid.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "font-fallback",
+   "width": 1440,
+   "message": "Typeface(s) declared but not loaded, so a fallback is rendering: Inter, Fira Code",
+   "fix": "Fix the font URL / family name, or the screenshots you are judging are not the design.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "lopsided",
+   "width": 1440,
+   "message": "A section keeps its content on one side and leaves 619px of the width empty: \"Empirical telemetry.\".",
+   "fix": "Fill the other side with what the section has (its picture, a second column, the figure), or defend the void in one sentence."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/desktop-fold.jpg",
+   "pages": [
+    "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/desktop-page-01.jpg",
+    "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/tablet-fold.jpg",
+   "pages": [
+    "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/mobile-fold.jpg",
+   "pages": [
+    "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/mobile-page-01.jpg",
+    "/Users/sambhavpundir/Intelligence/.taste-skill/inspect/mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

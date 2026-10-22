@@ -1,0 +1,290 @@
+import {
+  CourseTrack,
+  DAGStatus,
+  BossArenaStatus,
+  User,
+  CalendarEvent,
+} from "./types";
+
+export const DEFAULT_USER: User = {
+  username: "CyberScholar",
+  email: "scholar@antigravity.ai",
+  level: 2,
+  xp: 180,
+  xp_to_next_level: 500,
+  streak: 3,
+  stats: {
+    total_nodes_completed: 2,
+    total_quizzes_passed: 5,
+    total_bosses_defeated: 0,
+    combat_readiness: 0.37,
+  },
+};
+
+export const DEFAULT_TRACK: CourseTrack = {
+  id: "cs202",
+  title: "CS 202: Algorithms & Complexity Theory",
+  description:
+    "Deep exploration of algorithmic paradigms, asymptotic analysis, dynamic programming, and complexity classes.",
+  nodes: [
+    {
+      id: "algo_big_o",
+      course_id: "cs202",
+      title: "Asymptotic Notation & Time Complexity",
+      summary:
+        "Understanding Big-O, Big-Omega, Big-Theta, and worst-case vs average-case recurrence analysis.",
+      prerequisites: [],
+      tier: "SL",
+      mastery: 0.9,
+      weight: 0.15,
+      estimated_minutes: 40,
+      tags: ["sl", "analysis", "theory"],
+    },
+    {
+      id: "algo_divide_conquer",
+      course_id: "cs202",
+      title: "Divide & Conquer Recurrences",
+      summary:
+        "Master theorem, recursion trees, and analyzing MergeSort and QuickSort partition steps.",
+      prerequisites: ["algo_big_o"],
+      tier: "SL",
+      mastery: 0.75,
+      weight: 0.2,
+      estimated_minutes: 50,
+      tags: ["sl", "divide-conquer", "recursion"],
+    },
+    {
+      id: "algo_binary_heaps",
+      course_id: "cs202",
+      title: "Binary Heaps & Priority Queues",
+      summary:
+        "Complete binary tree array representations, bubble-up, bubble-down, and heapify complexity in O(n).",
+      prerequisites: ["algo_big_o"],
+      tier: "SL",
+      mastery: 0.4,
+      weight: 0.15,
+      estimated_minutes: 45,
+      tags: ["sl", "heaps", "priority-queues"],
+    },
+    {
+      id: "algo_dynamic_programming",
+      course_id: "cs202",
+      title: "Dynamic Programming & Optimal Substructure",
+      summary:
+        "Memoization vs tabulation, overlapping subproblems, and bellman state transitions (Knapsack, LCS, Edit Distance).",
+      prerequisites: ["algo_divide_conquer"],
+      tier: "HL",
+      mastery: 0.1,
+      weight: 0.25,
+      estimated_minutes: 60,
+      tags: ["hl", "dp", "optimization"],
+    },
+    {
+      id: "algo_graph_traversal",
+      course_id: "cs202",
+      title: "Graph Traversals & Topological Sort",
+      summary:
+        "Adjacency representations, DFS timestamps, cycle detection in DAGs, and Kahn's in-degree algorithm.",
+      prerequisites: ["algo_divide_conquer"],
+      tier: "HL",
+      mastery: 0.0,
+      weight: 0.15,
+      estimated_minutes: 55,
+      tags: ["hl", "graphs", "topological-sort"],
+    },
+    {
+      id: "algo_np_completeness",
+      course_id: "cs202",
+      title: "NP-Completeness & Polynomial Reductions",
+      summary:
+        "P vs NP landscape, verifiers vs deciders, Cook-Levin theorem, and 3-SAT to Vertex Cover reductions.",
+      prerequisites: ["algo_dynamic_programming", "algo_graph_traversal"],
+      tier: "EX",
+      mastery: 0.0,
+      weight: 0.1,
+      estimated_minutes: 75,
+      tags: ["ex", "complexity", "np-complete"],
+    },
+  ],
+};
+
+export const DEFAULT_DAG_STATUS: DAGStatus = {
+  course_id: "cs202",
+  is_acyclic: true,
+  unlock_states: {
+    algo_big_o: true,
+    algo_divide_conquer: true,
+    algo_binary_heaps: true,
+    algo_dynamic_programming: true,
+    algo_graph_traversal: true,
+    algo_np_completeness: false,
+  },
+  priorities: {
+    algo_big_o: 1.23,
+    algo_divide_conquer: 0.79,
+    algo_binary_heaps: 0.22,
+    algo_dynamic_programming: 0.49,
+    algo_graph_traversal: 0.47,
+    algo_np_completeness: 0.25,
+  },
+  descendants: {
+    algo_big_o: [
+      "algo_divide_conquer",
+      "algo_binary_heaps",
+      "algo_dynamic_programming",
+      "algo_graph_traversal",
+      "algo_np_completeness",
+    ],
+    algo_divide_conquer: [
+      "algo_dynamic_programming",
+      "algo_graph_traversal",
+      "algo_np_completeness",
+    ],
+    algo_binary_heaps: [],
+    algo_dynamic_programming: ["algo_np_completeness"],
+    algo_graph_traversal: ["algo_np_completeness"],
+    algo_np_completeness: [],
+  },
+  ranked_schedule: [
+    {
+      node_id: "algo_big_o",
+      title: "Asymptotic Notation & Time Complexity",
+      tier: "SL",
+      mastery: 0.9,
+      is_unlocked: true,
+      priority: 1.23,
+    },
+    {
+      node_id: "algo_divide_conquer",
+      title: "Divide & Conquer Recurrences",
+      tier: "SL",
+      mastery: 0.75,
+      is_unlocked: true,
+      priority: 0.79,
+    },
+    {
+      node_id: "algo_dynamic_programming",
+      title: "Dynamic Programming & Optimal Substructure",
+      tier: "HL",
+      mastery: 0.1,
+      is_unlocked: true,
+      priority: 0.49,
+    },
+    {
+      node_id: "algo_graph_traversal",
+      title: "Graph Traversals & Topological Sort",
+      tier: "HL",
+      mastery: 0.0,
+      is_unlocked: true,
+      priority: 0.47,
+    },
+    {
+      node_id: "algo_np_completeness",
+      title: "NP-Completeness & Polynomial Reductions",
+      tier: "EX",
+      mastery: 0.0,
+      is_unlocked: false,
+      priority: 0.25,
+    },
+    {
+      node_id: "algo_binary_heaps",
+      title: "Binary Heaps & Priority Queues",
+      tier: "SL",
+      mastery: 0.4,
+      is_unlocked: true,
+      priority: 0.22,
+    },
+  ],
+  edges: [
+    { source: "algo_big_o", target: "algo_divide_conquer" },
+    { source: "algo_big_o", target: "algo_binary_heaps" },
+    { source: "algo_divide_conquer", target: "algo_dynamic_programming" },
+    { source: "algo_divide_conquer", target: "algo_graph_traversal" },
+    { source: "algo_dynamic_programming", target: "algo_np_completeness" },
+    { source: "algo_graph_traversal", target: "algo_np_completeness" },
+  ],
+};
+
+export const DEFAULT_BOSS_STATUS: BossArenaStatus = {
+  course_title: "CS 202: Algorithms & Complexity Theory",
+  mini_boss: {
+    boss_id: "boss_midterm_colossus",
+    boss_name: "Midterm Algorithmic Colossus",
+    boss_type: "MINI_BOSS",
+    max_hp: 500,
+    current_hp: 285,
+    hp_percentage: 57,
+    scope_node_ids: [
+      "algo_big_o",
+      "algo_divide_conquer",
+      "algo_binary_heaps",
+      "algo_dynamic_programming",
+      "algo_graph_traversal",
+    ],
+    is_defeated: false,
+    unmastered_weaknesses: [
+      "Binary Heaps & Priority Queues",
+      "Dynamic Programming & Optimal Substructure",
+      "Graph Traversals & Topological Sort",
+    ],
+  },
+  main_boss: {
+    boss_id: "boss_grand_turing",
+    boss_name: "Grand Turing Overlord",
+    boss_type: "MAIN_BOSS",
+    max_hp: 1200,
+    current_hp: 770,
+    hp_percentage: 64,
+    scope_node_ids: [
+      "algo_big_o",
+      "algo_divide_conquer",
+      "algo_binary_heaps",
+      "algo_dynamic_programming",
+      "algo_graph_traversal",
+      "algo_np_completeness",
+    ],
+    is_defeated: false,
+    unmastered_weaknesses: [
+      "Binary Heaps & Priority Queues",
+      "Dynamic Programming & Optimal Substructure",
+      "Graph Traversals & Topological Sort",
+      "NP-Completeness & Polynomial Reductions",
+    ],
+  },
+};
+
+export const DEFAULT_CALENDAR_EVENTS: CalendarEvent[] = [
+  {
+    id: "cal_task_1",
+    summary: "[QUEST] Binary Heaps & Priority Queues",
+    description:
+      "Academic mastery quest for Binary Heaps & Priority Queues. Socratic evaluation ready.",
+    start: { dateTime: new Date(Date.now() + 2 * 3600 * 1000).toISOString() },
+    end: { dateTime: new Date(Date.now() + 3 * 3600 * 1000).toISOString() },
+    status: "confirmed",
+    is_completed: false,
+    drift_count: 0,
+  },
+  {
+    id: "cal_task_2",
+    summary: "[QUEST] Dynamic Programming & Optimal Substructure",
+    description:
+      "Academic mastery quest for Dynamic Programming & Optimal Substructure. Socratic evaluation ready.",
+    start: { dateTime: new Date(Date.now() + 26 * 3600 * 1000).toISOString() },
+    end: { dateTime: new Date(Date.now() + 27 * 3600 * 1000).toISOString() },
+    status: "confirmed",
+    is_completed: false,
+    drift_count: 0,
+  },
+  {
+    id: "cal_task_3",
+    summary: "[BOSS BATTLE] Divide & Conquer Recurrences",
+    description:
+      "Academic mastery quest for Divide & Conquer Recurrences. Socratic evaluation ready.",
+    start: { dateTime: new Date(Date.now() + 48 * 3600 * 1000).toISOString() },
+    end: { dateTime: new Date(Date.now() + 50 * 3600 * 1000).toISOString() },
+    status: "confirmed",
+    is_completed: false,
+    drift_count: 0,
+  },
+];

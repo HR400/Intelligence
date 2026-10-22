@@ -17,10 +17,10 @@ export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   const getColor = () => {
-    if (percentage >= 80) return "#003c33"; // Cohere Deep Green
-    if (percentage >= 50) return "#1863dc"; // Cohere Action Blue
-    if (percentage >= 25) return "#ff7759"; // Cohere Coral
-    return "#b30000"; // Cohere Error Red
+    if (percentage >= 80) return "#d4af37"; // Brand Gold — high readiness
+    if (percentage >= 50) return "#2563eb"; // Mana Blue — moderate
+    if (percentage >= 25) return "#c5a880"; // Gilded Accent — low
+    return "#991b1b";                       // Crimson — critical
   };
 
   return (
@@ -30,7 +30,7 @@ export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#eeece7"
+          stroke="#2d3545"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -43,12 +43,12 @@ export const CombatReadinessGauge: React.FC<CombatReadinessGaugeProps> = ({
           fill="transparent"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
+          strokeLinecap="square"
           className="transition-all duration-700 ease-out"
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-[11px] font-mono font-medium text-ink">
+        <span className="text-[11px] font-mono font-medium" style={{ color: "#e2e8f0" }}>
           {percentage}%
         </span>
       </div>
